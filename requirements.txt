@@ -1,0 +1,13 @@
+geopandas
+rasterio
+numpy
+scikit-learn
+scikit-image
+torch
+matplotlib
+tqdm
+shapely
+pandas
+opencv-python
+tensorboard
+rio-cogeo
