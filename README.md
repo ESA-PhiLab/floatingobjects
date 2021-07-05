@@ -2,6 +2,11 @@
 
 ![](https://github.com/jmifdal/floatingobjects/workflows/run-tests/badge.svg)
 
+Check our [ISPRS Conference Paper (Annals)](https://www.isprs-ann-photogramm-remote-sens-spatial-inf-sci.net/V-3-2021/285/2021/) and please consider citing
+
+> Mifdal, J., Longépé, N., and Rußwurm, M.: TOWARDS DETECTING FLOATING OBJECTS ON A GLOBAL SCALE WITH LEARNED SPATIAL FEATURES USING SENTINEL 2, ISPRS Ann. 
+> Photogramm. Remote Sens. Spatial Inf. Sci., V-3-2021, 285–293, https://doi.org/10.5194/isprs-annals-V-3-2021-285-2021, 2021.
+
 ## Getting Started
 
 The dataset is assumed to be located at `/data`. It can be downloaded from [this link](https://drive.google.com/file/d/10SGFhHMSnikgm9q90jJmHDVkhD_SZl7p/view?usp=sharing) with 
@@ -86,3 +91,18 @@ export TESTS_DATA_ROOT=/data
 python tests/dataset.py
 ```
 and check if all samples of the datasets can be returned and that no overlap exists in the train/test splits.
+
+## Bibtex
+
+```
+@Article{mifdal2021floating,
+    AUTHOR = {Mifdal, J. and Long\'ep\'e, N. and Ru{\ss}wurm, M.},
+    TITLE = {TOWARDS DETECTING FLOATING OBJECTS ON A GLOBAL SCALE WITH LEARNED SPATIAL FEATURES USING SENTINEL 2},
+    JOURNAL = {ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences},
+    VOLUME = {V-3-2021},
+    YEAR = {2021},
+    PAGES = {285--293},
+    URL = {https://www.isprs-ann-photogramm-remote-sens-spatial-inf-sci.net/V-3-2021/285/2021/},
+    DOI = {10.5194/isprs-annals-V-3-2021-285-2021}
+}
+```
