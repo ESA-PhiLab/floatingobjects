@@ -15,21 +15,33 @@ l2abands = ["B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B8A", "B9", "B11", 
 HARD_NEGATIVE_MINING_SAMPLE_BORDER_OFFSET = 1000  # meter
 
 allregions = [
-    "danang_20181005",
-    "biscay_20180419",
-    "lagos_20200505",
-    "riodejaneiro_20180504",
-    "toledo_20191221",
-    "longxuyen_20181102",
-    "mandaluyong_20180314",
-    "panama_20190425",
-    "sandiego_20180804",
-    "vungtau_20180423",
-    "venice_20180928",
     "accra_20181031",
+    "biscay_20180419",
+    "danang_20181005",
+    "kentpointfarm_20180710",
+    "kolkata_20201115",
     "lagos_20190101",
+    "lagos_20200505",
+    "london_20180611",
+    "longxuyen_20181102",
+    "mandaluyong_20180314",  
+    "neworleans_20200202",
+    "panama_20190425",
+    "portalfredSouthAfrica_20180601",
+    "riodejaneiro_20180504",
+    "sandiego_20180804",
+    "sanfrancisco_20190219", 
+    "shengsi_20190615",
+    "suez_20200403",
+    "tangshan_20180130",
+    "toledo_20191221",
+    "tungchungChina_20190922",
+    "tunisia_20180715",
+    "turkmenistan_20181030",
     "venice_20180630",
-    "kolkata_20201115"]
+    "venice_20180928",
+    "vungtau_20180423"
+    ]
 
 def get_region_split(seed=0, fractions=(0.6, 0.2, 0.2)):
 
