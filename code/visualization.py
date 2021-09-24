@@ -1,8 +1,7 @@
-
 import matplotlib.pyplot as plt
 import numpy as np
 from skimage.exposure import equalize_hist
-
+from itertools import cycle
 from data import l2abands as bands
 
 def calculate_fdi(scene):
@@ -49,4 +48,43 @@ def plot_batch(images, masks, y_preds):
         axs_row[4].imshow(y_pred)
         axs_row[4].set_title("Prediction")
         [ax.axis("off") for ax in axs_row]
+    return fig
+
+
+def plot_curves(nets, fpr, tpr, roc_auc, recall, prec):
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 7))
+    lw = 2
+    colors = cycle(['aqua', 'red']) if len(nets) == 2 else cycle(['aqua', 'red', 'cornflowerblue', 'moccasin', 'mediumpurple'])
+
+    # ROC Curves
+    if "svm" in fpr:
+        ax1.plot(fpr["svm"], tpr["svm"], label='Support-Vector Machine (AUC = {0:0.2f})'.format(roc_auc["svm"]), color='deeppink', linewidth=lw)
+        ax1.plot(fpr["rf"], tpr["rf"], label='Random Forest (AUC = {0:0.2f})'.format(roc_auc["rf"]), color='navy', linewidth=lw)
+        ax1.plot(fpr["nb"], tpr["nb"], label='Naïve Bayes (AUC = {0:0.2f})'.format(roc_auc["nb"]), color='forestgreen', linewidth=lw)
+        ax1.plot(fpr["hgb"], tpr["hgb"], label='Hist. Gradient Boosting (AUC = {0:0.2f})'.format(roc_auc["hgb"]), color='darkorange', linewidth=lw)
+
+    for i, color in zip(nets, colors):
+        j = 'U-Net' if i=='unet-cross-val-2fold' else 'MA-Net'
+        ax1.plot(fpr[j], tpr[j], color=color, lw=lw, label='{0} (AUC = {1:0.2f})'.format(j, roc_auc[j]))
+    ax1.plot([0, 1], [0, 1], 'k--', lw=1)
+    ax1.set(xlim=[-0.01, 1.01], ylim=[-0.01, 1.01], 
+            xlabel='False Positive Rate', ylabel='True Positive Rate', 
+            title='Receiver Operating Characteristic')
+
+    # Recall/Precision Curves
+    if "svm" in fpr:
+        ax2.plot(recall["svm"], prec["svm"], label='Support-Vector Machine', color='deeppink', linewidth=lw)
+        ax2.plot(recall["rf"], prec["rf"], label='Random Forest', color='navy', linewidth=lw)
+        ax2.plot(recall["nb"], prec["nb"], label='Naïve Bayes', color='forestgreen', linewidth=lw)
+        ax2.plot(recall["hgb"], prec["hgb"], label='Hist. Gradient Boosting', color='darkorange', linewidth=lw)
+
+    for i, color in zip(nets, colors):
+        j = 'U-Net' if i=='unet-cross-val-2fold' else 'MA-Net'
+        ax2.plot(recall[j], prec[j], color=color, lw=lw, label=f'{j}')
+    ax2.set(xlim=[-0.01, 1.01], ylim=[-0.01, 1.01], 
+            xlabel='Recall', ylabel='Precision', 
+            title='Precision/Recall curve')
+
+    handles, labels = ax1.get_legend_handles_labels()
+    fig.legend(handles, labels, loc='lower center', bbox_to_anchor=(0.5, -0.1), fancybox=True, shadow=True, ncol=2)
     return fig

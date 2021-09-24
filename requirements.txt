@@ -11,3 +11,5 @@ pandas
 opencv-python
 tensorboard
 rio-cogeo
+gdown
+segmentation-models-pytorch

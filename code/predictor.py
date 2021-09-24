@@ -14,6 +14,7 @@ from data import get_region_split
 
 class PythonPredictor():
 
+    #def __init__(self, modelname, modelpath, image_size=(480,480), device="cpu", offset=64, use_test_aug=2, add_fdi_ndvi=False):
     def __init__(self, modelpath, image_size=(480,480), device="cpu", offset=64, use_test_aug=2, add_fdi_ndvi=False):
         self.image_size = image_size
         self.device = device
@@ -21,6 +22,7 @@ class PythonPredictor():
 
         #self.model = UNet(n_channels=12, n_classes=1, bilinear=False)
         self.model = get_model(os.path.basename(modelpath).split("-")[0].lower(), inchannels=12 if not add_fdi_ndvi else 14)
+        #self.model = get_model(modelname, inchannels=12 if not add_fdi_ndvi else 14)
         self.model.load_state_dict(torch.load(modelpath)["model_state_dict"])
         self.model = self.model.to(device)
         self.transform = get_transform("test", add_fdi_ndvi=add_fdi_ndvi)
@@ -65,6 +67,7 @@ class PythonPredictor():
                 # predict
                 with torch.no_grad():
                     x = image.unsqueeze(0)
+                    #import pdb; pdb.set_trace()
                     y_logits = torch.sigmoid(self.model(x).squeeze(0))
                     if self.use_test_aug > 0:
                         y_logits += torch.sigmoid(torch.fliplr(self.model(torch.fliplr(x)))).squeeze(0) # fliplr)
@@ -97,7 +100,8 @@ class PythonPredictor():
                 dst.write(writedata, window=window)
 
 def main(args):
-    predictor = PythonPredictor(args.snapshot_path, device="cuda", add_fdi_ndvi=args.add_fdi_ndvi)
+    predictor = PythonPredictor(args.snapshot_path, args.image_size, device="cuda", add_fdi_ndvi=args.add_fdi_ndvi)
+    #predictor = PythonPredictor(args.model, args.snapshot_path, args.image_size, device="cuda", add_fdi_ndvi=args.add_fdi_ndvi)
     if args.image_path is not None:
         predictor.predict(args.image_path, args.prediction_path)
     else:
@@ -127,13 +131,15 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--image-path', type=str, default=None)
     parser.add_argument('--image-folder', type=str, default=None)
+    parser.add_argument('--image-size', type=int, default=128)
+    parser.add_argument('--model', type=str, default="unet")
     parser.add_argument('--seed', type=int, default=None)
     parser.add_argument('--prediction-path', type=str, default="/data")
     parser.add_argument('--snapshot-path', type=str)
     parser.add_argument('--add-fdi-ndvi', action="store_true")
 
     args = parser.parse_args()
-    # args.image_size = (args.image_size,args.image_size)
+    args.image_size = (args.image_size,args.image_size)
     return args
 
 if __name__ == '__main__':

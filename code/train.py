@@ -22,7 +22,7 @@ def parse_args():
     parser.add_argument('--batch-size', type=int, default=8)
     parser.add_argument('--seed', type=int, default=0, help="random seed for train/test region split")
     parser.add_argument('--workers', type=int, default=0)
-    parser.add_argument('--augmentation-intensity', type=int, default=1, help="number indicating intensity 0 ,1 (noise),2 (channel shuffle)")
+    parser.add_argument('--augmentation-intensity', type=int, default=1, help="number indicating intensity 0, 1 (noise), 2 (channel shuffle)")
     parser.add_argument('--model', type=str, default="unet")
     parser.add_argument('--add-fdi-ndvi', action="store_true")
     parser.add_argument('--image-size', type=int, default=128)
@@ -31,7 +31,7 @@ def parse_args():
     parser.add_argument('--no-pretrained', action="store_true")
     parser.add_argument('--learning-rate', type=float, default=1e-3)
     parser.add_argument('--tensorboard-logdir', type=str, default=None)
-    parser.add_argument('--pos-weight', type=float, default=1, help="positional weight for the floating object class. large values counteract ")
+    parser.add_argument('--pos-weight', type=float, default=1, help="positional weight for the floating object class, large values counteract")
     args = parser.parse_args()
     # args.image_size = (args.image_size,args.image_size)
 
