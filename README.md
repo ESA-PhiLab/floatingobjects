@@ -9,7 +9,7 @@ Check our [ISPRS Conference Paper (Annals)](https://www.isprs-ann-photogramm-rem
 
 ## Getting Started
 
-The dataset is assumed to be located at `/data`. It can be downloaded from [this link](https://drive.google.com/file/d/10SGFhHMSnikgm9q90jJmHDVkhD_SZl7p/view?usp=sharing) with 
+The dataset is assumed to be located at `/data`. It can be downloaded from [this link](https://drive.google.com/drive/folders/1QGjzRTVRQbf4YbzfUWMeIdJvYkzuipGJ?usp=sharing) with 
 the script `python code/download.py /data`
 
 ### Environments
