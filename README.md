@@ -7,6 +7,10 @@ Check our [ISPRS Conference Paper (Annals)](https://www.isprs-ann-photogramm-rem
 > Mifdal, J., Longépé, N., and Rußwurm, M.: TOWARDS DETECTING FLOATING OBJECTS ON A GLOBAL SCALE WITH LEARNED SPATIAL FEATURES USING SENTINEL 2, ISPRS Ann. 
 > Photogramm. Remote Sens. Spatial Inf. Sci., V-3-2021, 285–293, https://doi.org/10.5194/isprs-annals-V-3-2021-285-2021, 2021.
 
+Check also our most recent publication [OCEANS Conference Paper](https://210507-004.oceansvirtual.com/view/content/skdwP611e3583eba2b/ecf65c2aaf278557ad05c213247d67a54196c9376a0aed8f1875681f182daeed)
+
+> Carmo, R., Mifdal, J., and Rußwurm, M.: Detecting Macro Floating Objects on Coastal Water Bodies using Sentinel-2 Data, OCEANS 2021 San Diego – Porto, 2021.
+
 ## Getting Started
 
 The dataset is assumed to be located at `/data`. It can be downloaded from [this link](https://drive.google.com/file/d/10SGFhHMSnikgm9q90jJmHDVkhD_SZl7p/view?usp=sharing) with 
@@ -39,7 +43,7 @@ Usa a model snapshot (`--snapshot-path`) to predict floating objects on an image
 stored in as tif in the location specified by `--prediction-path`
 
 ```
-python code/predict.py --prediction-path "prediction.tif" \\
+python code/predictor.py --prediction-path "prediction.tif" \\
     --image-path "Limassol20181215_l2a.tif" \\
     --snapshot-path unet-posweight10-lr001-aug1.pth.tar
 ```
@@ -48,14 +52,14 @@ python code/predict.py --prediction-path "prediction.tif" \\
 
 For the 5-fold training run
 ```
-python main.py train --results-dir models --data-path /data
-```
+python code/main.py train --results-dir models --data-path /data
+``` 
 
 ## Dataset
 
 ### Download
 
-The dataset can be manually downloaded using [this link](https://drive.google.com/file/d/10SGFhHMSnikgm9q90jJmHDVkhD_SZl7p/view?usp=sharing) and unzipped via
+The dataset can be manually downloaded using [this link](https://drive.google.com/drive/folders/1QGjzRTVRQbf4YbzfUWMeIdJvYkzuipGJ?usp=sharing) and unzipped via
 ```
 python code/download.py ./data/
 ```
