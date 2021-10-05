@@ -60,7 +60,7 @@ def manet_seed0(**kwargs):
     return model
 
 
-def unet_seed1(**kwargs):
+def manet_seed1(**kwargs):
     """
     MA-Net pre-trained for 50 epochs, with batch size of 160, learning rate of 0.001, seed 1
     """
