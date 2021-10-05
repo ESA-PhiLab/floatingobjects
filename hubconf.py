@@ -49,7 +49,7 @@ def manet_seed0(**kwargs):
     """
     add_fdi_ndvi = False
     no_pretrained = False
-    url = 'https://drive.google.com/file/d/1RWSS1AJweAgBJRftr6TCMb9vNN_hTNXf/view?usp=sharing'
+    url = 'https://drive.google.com/uc?export=download&id=1RWSS1AJweAgBJRftr6TCMb9vNN_hTNXf'
     output = 'manet-posweight1-lr001-bs160-ep50-aug1-seed0.pth.tar'
     gdown.download(url, output, quiet=True)
 
@@ -66,7 +66,7 @@ def unet_seed1(**kwargs):
     """
     add_fdi_ndvi = False
     no_pretrained = False
-    url = 'https://drive.google.com/file/d/17I2PJS947p71EV-zZhl6laPemknl2_UY/view?usp=sharing'
+    url = 'https://drive.google.com/uc?export=download&id=17I2PJS947p71EV-zZhl6laPemknl2_UY'
     output = 'manet-posweight1-lr001-bs160-ep50-aug1-seed1.pth.tar'
     gdown.download(url, output, quiet=True)
 
