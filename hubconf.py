@@ -11,7 +11,7 @@ device = "cuda"
 
 def unet_seed0(**kwargs):
     """
-    U-Net pre-trained with for 50 epochs, batch size of 160, learning rate of 0.001, seed 0
+    U-Net pre-trained with for 50 epochs, with batch size of 160, learning rate of 0.001, seed 0
     """
     add_fdi_ndvi = False
     no_pretrained = False
@@ -28,7 +28,7 @@ def unet_seed0(**kwargs):
 
 def unet_seed1(**kwargs):
     """
-    U-Net pre-trained with for 50 epochs, batch size of 160, learning rate of 0.001, seed 1
+    U-Net pre-trained with for 50 epochs, with batch size of 160, learning rate of 0.001, seed 1
     """
     add_fdi_ndvi = False
     no_pretrained = False
@@ -39,5 +39,39 @@ def unet_seed1(**kwargs):
     snapshot_file = torch.load(output)
     inchannels = 12 if not add_fdi_ndvi else 14
     model = get_model("unet", inchannels=inchannels, pretrained=not no_pretrained).to(device)
+    model.load_state_dict(snapshot_file["model_state_dict"])
+    return model
+
+
+def manet_seed0(**kwargs):
+    """
+    MA-Net pre-trained for 50 epochs, with batch size of 160, learning rate of 0.001, seed 0
+    """
+    add_fdi_ndvi = False
+    no_pretrained = False
+    url = 'https://drive.google.com/uc?export=download&id=1RWSS1AJweAgBJRftr6TCMb9vNN_hTNXf'
+    output = 'manet-posweight1-lr001-bs160-ep50-aug1-seed0.pth.tar'
+    gdown.download(url, output, quiet=True)
+
+    snapshot_file = torch.load(output)
+    inchannels = 12 if not add_fdi_ndvi else 14
+    model = get_model("manet", inchannels=inchannels, pretrained=not no_pretrained).to(device)
+    model.load_state_dict(snapshot_file["model_state_dict"])
+    return model
+
+
+def manet_seed1(**kwargs):
+    """
+    MA-Net pre-trained for 50 epochs, with batch size of 160, learning rate of 0.001, seed 1
+    """
+    add_fdi_ndvi = False
+    no_pretrained = False
+    url = 'https://drive.google.com/uc?export=download&id=17I2PJS947p71EV-zZhl6laPemknl2_UY'
+    output = 'manet-posweight1-lr001-bs160-ep50-aug1-seed1.pth.tar'
+    gdown.download(url, output, quiet=True)
+
+    snapshot_file = torch.load(output)
+    inchannels = 12 if not add_fdi_ndvi else 14
+    model = get_model("manet", inchannels=inchannels, pretrained=not no_pretrained).to(device)
     model.load_state_dict(snapshot_file["model_state_dict"])
     return model
