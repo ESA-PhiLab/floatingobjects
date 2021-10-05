@@ -55,6 +55,13 @@ For the 5-fold training run
 python code/main.py train --results-dir models --data-path /data
 ``` 
 
+## Pretrained models from PyTorch Hub
+```python
+import torch
+unet_seed0 = torch.hub.load('ESA-PhiLab/floatingobjects:dev-raq', 'unet_seed0')
+unet_seed1 = torch.hub.load('ESA-PhiLab/floatingobjects:dev-raq', 'unet_seed1')
+```  
+
 ## Dataset
 
 ### Download
