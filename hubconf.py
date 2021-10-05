@@ -1,38 +1,12 @@
 import torch
 import gdown
-import torch.nn as nn
+import os
+import sys
+this_folder = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(os.path.join(this_folder, "code"))
+
+from model import get_model
 device = "cuda"
-
-
-def get_model(modelname, inchannels=12, pretrained=True):
-    if modelname == "unet":
-        # initialize model (random weights)
-        model = UNet(n_channels=inchannels,
-                     n_classes=1,
-                     bilinear=False)
-    elif modelname in ["resnetunet", "resnetunetscse"]:
-        import segmentation_models_pytorch as smp
-        model = smp.Unet(
-            encoder_name="resnet34" if "resnet" in modelname else "efficientnet-b7",  # choose encoder, e.g. mobilenet_v2 or efficientnet-b7
-            encoder_weights="imagenet" if pretrained else None,
-            in_channels=3,
-            decoder_attention_type="scse" if modelname == "resnetunetscse" else None,
-            classes=1,
-        )
-        model.encoder.conv1 = torch.nn.Conv2d(inchannels, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
-
-    elif modelname in ["manet"]:
-        import segmentation_models_pytorch as smp
-        model = smp.MAnet(
-            encoder_name="resnet34",
-            encoder_weights="imagenet" if pretrained else None,
-            in_channels=3,
-            classes=1,
-        )
-        model.encoder.conv1 = torch.nn.Conv2d(inchannels, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
-    else:
-        raise ValueError(f"model {modelname} not recognized")
-    return model
 
 
 def unet_seed0(**kwargs):
