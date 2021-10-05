@@ -1,6 +1,11 @@
 import torch
 import gdown
-from code.model.py import get_model
+import os
+import sys
+this_folder = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(os.path.join(this_folder, "..", "code"))
+
+from model import get_model
 device = "cuda"
 
 def unet_seed0(**kwargs):
