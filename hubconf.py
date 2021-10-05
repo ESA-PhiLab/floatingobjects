@@ -1,6 +1,6 @@
 import torch
 import gdown
-from code.model import get_model
+from code.model.py import get_model
 device = "cuda"
 
 def unet_seed0(**kwargs):
