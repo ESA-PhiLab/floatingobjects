@@ -55,11 +55,13 @@ For the 5-fold training run
 python code/main.py train --results-dir models --data-path /data
 ``` 
 
-### Pretrained models from PyTorch Hub
+#### Load pretrained models using PyTorch Hub
+Here you can load the pretrained weights from the 2-fold training of U-Net, according to what has been published in [OCEANS Conference Paper](https://210507-004.oceansvirtual.com/view/content/skdwP611e3583eba2b/ecf65c2aaf278557ad05c213247d67a54196c9376a0aed8f1875681f182daeed)
+
 ```python
 import torch
-unet_seed0 = torch.hub.load('ESA-PhiLab/floatingobjects:dev-raq', 'unet_seed0')
-unet_seed1 = torch.hub.load('ESA-PhiLab/floatingobjects:dev-raq', 'unet_seed1')
+unet_seed0 = torch.hub.load('ESA-PhiLab/floatingobjects:master', 'unet_seed0')
+unet_seed1 = torch.hub.load('ESA-PhiLab/floatingobjects:master', 'unet_seed1')
 ```  
 
 ## Dataset
