@@ -6,8 +6,8 @@ this_folder = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(this_folder, "code"))
 
 from model import get_model
-device = "cuda"
-
+#device = "cuda"
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def unet_seed0(**kwargs):
     """
