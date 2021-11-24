@@ -19,7 +19,7 @@ def unet_seed0(**kwargs):
     output = 'unet-posweight1-lr001-bs160-ep50-aug1-seed0.pth.tar'
     gdown.download(url, output, quiet=True)
 
-    snapshot_file = torch.load(output)
+    snapshot_file = torch.load(output, map_location=device)
     inchannels = 12 if not add_fdi_ndvi else 14
     model = get_model("unet", inchannels=inchannels, pretrained=not no_pretrained).to(device)
     model.load_state_dict(snapshot_file["model_state_dict"])
@@ -36,7 +36,7 @@ def unet_seed1(**kwargs):
     output = 'unet-posweight1-lr001-bs160-ep50-aug1-seed1.pth.tar'
     gdown.download(url, output, quiet=True)
 
-    snapshot_file = torch.load(output)
+    snapshot_file = torch.load(output, map_location=device)
     inchannels = 12 if not add_fdi_ndvi else 14
     model = get_model("unet", inchannels=inchannels, pretrained=not no_pretrained).to(device)
     model.load_state_dict(snapshot_file["model_state_dict"])
@@ -53,7 +53,7 @@ def manet_seed0(**kwargs):
     output = 'manet-posweight1-lr001-bs160-ep50-aug1-seed0.pth.tar'
     gdown.download(url, output, quiet=True)
 
-    snapshot_file = torch.load(output)
+    snapshot_file = torch.load(output, map_location=device)
     inchannels = 12 if not add_fdi_ndvi else 14
     model = get_model("manet", inchannels=inchannels, pretrained=not no_pretrained).to(device)
     model.load_state_dict(snapshot_file["model_state_dict"])
@@ -70,7 +70,7 @@ def manet_seed1(**kwargs):
     output = 'manet-posweight1-lr001-bs160-ep50-aug1-seed1.pth.tar'
     gdown.download(url, output, quiet=True)
 
-    snapshot_file = torch.load(output)
+    snapshot_file = torch.load(output, map_location=device)
     inchannels = 12 if not add_fdi_ndvi else 14
     model = get_model("manet", inchannels=inchannels, pretrained=not no_pretrained).to(device)
     model.load_state_dict(snapshot_file["model_state_dict"])
