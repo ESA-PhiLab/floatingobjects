@@ -23,7 +23,7 @@ class PythonPredictor():
         #self.model = UNet(n_channels=12, n_classes=1, bilinear=False)
         self.model = get_model(os.path.basename(modelpath).split("-")[0].lower(), inchannels=12 if not add_fdi_ndvi else 14)
         #self.model = get_model(modelname, inchannels=12 if not add_fdi_ndvi else 14)
-        self.model.load_state_dict(torch.load(modelpath)["model_state_dict"])
+        self.model.load_state_dict(torch.load(modelpath, map_location=torch.device(device))["model_state_dict"])
         self.model = self.model.to(device)
         self.transform = get_transform("test", add_fdi_ndvi=add_fdi_ndvi)
         self.use_test_aug = use_test_aug
@@ -100,7 +100,8 @@ class PythonPredictor():
                 dst.write(writedata, window=window)
 
 def main(args):
-    predictor = PythonPredictor(args.snapshot_path, args.image_size, device="cuda", add_fdi_ndvi=args.add_fdi_ndvi)
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    predictor = PythonPredictor(args.snapshot_path, args.image_size, device=device, add_fdi_ndvi=args.add_fdi_ndvi)
     #predictor = PythonPredictor(args.model, args.snapshot_path, args.image_size, device="cuda", add_fdi_ndvi=args.add_fdi_ndvi)
     if args.image_path is not None:
         predictor.predict(args.image_path, args.prediction_path)
