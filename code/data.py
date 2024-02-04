@@ -18,26 +18,17 @@ allregions = [
     "accra_20181031",
     "biscay_20180419",
     "danang_20181005",
-    "kentpointfarm_20180710",
     "kolkata_20201115",
     "lagos_20190101",
     "lagos_20200505",
-    "london_20180611",
     "longxuyen_20181102",
     "mandaluyong_20180314",  
     "neworleans_20200202",
     "panama_20190425",
-    "portalfredSouthAfrica_20180601",
     "riodejaneiro_20180504",
     "sandiego_20180804",
-    "sanfrancisco_20190219", 
     "shengsi_20190615",
-    "suez_20200403",
-    "tangshan_20180130",
     "toledo_20191221",
-    "tungchungChina_20190922",
-    "tunisia_20180715",
-    "turkmenistan_20181030",
     "venice_20180630",
     "venice_20180928",
     "vungtau_20180423"
@@ -170,13 +161,13 @@ class FloatingSeaObjectRegionDataset(torch.utils.data.Dataset):
         width = right - left
         height = top - bottom
 
-        # buffer_left_right = (self.output_size[0] * 10 - width) / 2
-        buffer_left_right = (self.output_size * 10 - width) / 2
+        buffer_left_right = (self.output_size[0] * 10 - width) / 2
+        #buffer_left_right = (self.output_size * 10 - width) / 2
         left -= buffer_left_right
         right += buffer_left_right
 
-        # buffer_bottom_top = (self.output_size[1] * 10 - height) / 2
-        buffer_bottom_top = (self.output_size * 10 - height) / 2
+        buffer_bottom_top = (self.output_size[1] * 10 - height) / 2
+        #buffer_bottom_top = (self.output_size * 10 - height) / 2
         bottom -= buffer_bottom_top
         top += buffer_bottom_top
 
@@ -204,7 +195,7 @@ class FloatingSeaObjectRegionDataset(torch.utils.data.Dataset):
                                   transform=win_transform, out_shape=image[0].shape)
 
         # if feature is near the image border, image wont be the desired output size
-        H, W = self.output_size, self.output_size
+        H, W = self.output_size[0], self.output_size[0]
         c, h, w = image.shape
         dh = (H - h) / 2
         dw = (W - w) / 2
