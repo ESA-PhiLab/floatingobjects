@@ -161,13 +161,13 @@ class FloatingSeaObjectRegionDataset(torch.utils.data.Dataset):
         width = right - left
         height = top - bottom
 
-        buffer_left_right = (self.output_size[0] * 10 - width) / 2
-        #buffer_left_right = (self.output_size * 10 - width) / 2
+        # buffer_left_right = (self.output_size[0] * 10 - width) / 2
+        buffer_left_right = (self.output_size * 10 - width) / 2
         left -= buffer_left_right
         right += buffer_left_right
 
-        buffer_bottom_top = (self.output_size[1] * 10 - height) / 2
-        #buffer_bottom_top = (self.output_size * 10 - height) / 2
+        # buffer_bottom_top = (self.output_size[1] * 10 - height) / 2
+        buffer_bottom_top = (self.output_size * 10 - height) / 2
         bottom -= buffer_bottom_top
         top += buffer_bottom_top
 
@@ -195,7 +195,7 @@ class FloatingSeaObjectRegionDataset(torch.utils.data.Dataset):
                                   transform=win_transform, out_shape=image[0].shape)
 
         # if feature is near the image border, image wont be the desired output size
-        H, W = self.output_size[0], self.output_size[0]
+        H, W = self.output_size, self.output_size
         c, h, w = image.shape
         dh = (H - h) / 2
         dw = (W - w) / 2
