@@ -53,7 +53,12 @@ python code/predictor.py --prediction-path "prediction.tif" \\
 For the 5-fold training run
 ```
 python code/main.py train --results-dir models --data-path /data
-``` 
+```
+
+```
+!python code/train.py --data-path /content/floatingobjects/data --snapshot-path /content/floatingobjects/models/model.pth.tar --image-size 128 --epochs 50 --tensorboard-logdir /content/floatingobjects/models/runs/
+
+```
 
 #### Load pretrained models using PyTorch Hub
 Here you can load the models with pretrained weights from the 2-fold training of U-Net and MA-Net, according to what has been published in [OCEANS Conference Paper](https://210507-004.oceansvirtual.com/view/content/skdwP611e3583eba2b/ecf65c2aaf278557ad05c213247d67a54196c9376a0aed8f1875681f182daeed)
