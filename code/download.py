@@ -12,13 +12,20 @@ if __name__ == "__main__":
     parser.add_argument('storepath', type=str, nargs='?', default=os.path.join(this_folder, "..", "data"))
     args = parser.parse_args()
 
-    print(f"creating {os.path.abspath(args.storepath)}")
+    # Ensure the directory exists
+    print(f"Creating {os.path.abspath(args.storepath)}")
     os.makedirs(args.storepath, exist_ok=True)
 
-    # download
-    print(f"downloading {URL} to {os.path.abspath(args.storepath)}")
-    gdown.download(URL, args.storepath, quiet=False)
+    # Specify the path including the filename where the file will be saved
+    zip_path = os.path.join(args.storepath, "data.zip")
 
-    # unpack
-    print(f"unpacking {args.storepath}/data.zip to {os.path.abspath(args.storepath)}")
-    shutil.unpack_archive(os.path.join(args.storepath, "data.zip"), os.path.join(args.storepath, ".."))
+    # Download
+    print(f"Downloading {URL} to {zip_path}")
+    gdown.download(URL, zip_path, quiet=False)
+
+    # Unpack
+    print(f"Unpacking {zip_path} to {os.path.abspath(args.storepath)}")
+    shutil.unpack_archive(zip_path, os.path.abspath(args.storepath))
+
+    # Optionally, you can delete the zip file after unpacking if it's no longer needed
+    # os.remove(zip_path)
